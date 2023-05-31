@@ -1,0 +1,96 @@
+post:
+  tags:
+    - Users
+  summary: Upload User
+  operationId: uploadUser
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/CreateUser'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/User'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Errors'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+    '500':
+      $ref: '#/components/responses/InternalError'
+get:
+  tags:
+    - Users
+  summary: List Users
+  operationId: getUsersList
+  parameters:
+    - $ref: '#/components/parameters/pageLimitParam'
+    - $ref: '#/components/parameters/pageNumberParam'
+    - $ref: '#/components/parameters/sortingParam'
+    - in: query
+      name: 'filter[title]'
+      description: Title or a part of a title to be filtered with
+      required: false
+      schema:
+        type: string
+    - in: query
+      name: 'filter[network]'
+      required: false
+      description: Chain addresses to be filtered with
+      schema:
+        type: array
+        items:
+          type: string
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Errors'
+    '404':
+      $ref: '#/components/responses/NotFound'
+    '500':
+      $ref: '#/components/responses/InternalError'

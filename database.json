@@ -1,0 +1,3 @@
+{
+    "dev": "postgresql://user:user@localhost:5433/user?sslmode=disable"
+}

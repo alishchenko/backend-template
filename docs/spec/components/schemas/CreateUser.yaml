@@ -1,0 +1,23 @@
+allOf:
+  - $ref: '#/components/schemas/CreateUserKey'
+  - type: object
+    required:
+      - attributes
+    properties:
+      attributes:
+        type: object
+        required:
+          - name
+          - age
+          - role
+        properties:
+          name:
+            type: string
+            description: User's name
+            example: 'John'
+          age:
+            type: integer
+            description: User's age
+            example: 32
+          role:
+            type: boolean
