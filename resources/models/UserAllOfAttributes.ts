@@ -20,13 +20,13 @@ import { exists, mapValues } from '../runtime';
  */
 export interface UserAllOfAttributes {
     /**
-     * User's name
+     * Name of user
      * @type {string}
      * @memberof UserAllOfAttributes
      */
     name: string;
     /**
-     * User's age
+     * Age of user
      * @type {number}
      * @memberof UserAllOfAttributes
      */

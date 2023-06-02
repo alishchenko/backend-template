@@ -8,15 +8,17 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/*": ["internal/*"],
-      "@resources": ["resources/*"], 
+      "@resources/*": ["./resources/*"], 
     }
-},
+  },
   "include": [
     "internal/**/*.ts",
     "resources/**/*.ts",
+
+    "main.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }

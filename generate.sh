@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-GENERATED="/home/mango/Documents/DistributedLab/backend_ts_template/resources"
-OPENAPI_DIR="/home/mango/Documents/DistributedLab/backend_ts_template/docs/web_deploy/"
+GENERATED="/home/mango/Documents/DistributedLab/backend_template/resources"
+OPENAPI_DIR="/home/mango/Documents/DistributedLab/backend_template/docs/web_deploy/"
 PACKAGE_NAME=resources
 
 function printHelp {
@@ -21,7 +21,7 @@ function generate {
     cd docs
     npm run build
     cd ..
-    openapi-generator-cli generate -i ${OPENAPI_DIR}/openapi.yaml -g typescript -o ${GENERATED}
+    npx openapi-generator-cli generate -i ${OPENAPI_DIR}/openapi.yaml -g typescript -o ${GENERATED}
 }
 
 #echo ${OPENAPI_DIR} ${GENERATED} ${GENERATOR_IMAGE} ${PACKAGE_NAME}

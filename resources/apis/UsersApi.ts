@@ -46,8 +46,9 @@ export interface GetUsersListRequest {
     pageLimit?: number;
     pageNumber?: number;
     pageOrder?: GetUsersListPageOrderEnum;
-    filterTitle?: string;
-    filterNetwork?: Array<string>;
+    filterName?: string;
+    filterAge?: Array<string>;
+    filterRole?: Array<string>;
 }
 
 export interface UpdateUserRequest {
@@ -141,12 +142,16 @@ export class UsersApi extends runtime.BaseAPI {
             queryParameters['page[order]'] = requestParameters.pageOrder;
         }
 
-        if (requestParameters.filterTitle !== undefined) {
-            queryParameters['filter[title]'] = requestParameters.filterTitle;
+        if (requestParameters.filterName !== undefined) {
+            queryParameters['filter[name]'] = requestParameters.filterName;
         }
 
-        if (requestParameters.filterNetwork) {
-            queryParameters['filter[network]'] = requestParameters.filterNetwork;
+        if (requestParameters.filterAge) {
+            queryParameters['filter[age]'] = requestParameters.filterAge;
+        }
+
+        if (requestParameters.filterRole) {
+            queryParameters['filter[role]'] = requestParameters.filterRole;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

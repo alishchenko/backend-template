@@ -1,19 +1,21 @@
-import { User } from "../user";
-import knex, { Knex } from 'knex';
+import { User } from '../user';
+import { Knex } from 'knex';
 
 const
-userTableName = 'users',
-userTableIdColumn = 'id',
-userTableNameColumn = 'name',
-userTableAgeColumn = 'age',
-userTableRoleColumn = 'role'
+  userTableName = 'users',
+  userTableIdColumn = 'id',
+  userTableNameColumn = 'name',
+  userTableAgeColumn = 'age',
+  userTableRoleColumn = 'role';
 
 
 export class UserQ {
   private knex: Knex;
+  private query: Knex.QueryBuilder;
 
   constructor(knex: Knex) {
     this.knex = knex;
+    this.query = knex(userTableName);
   }
 
   New(): UserQ {
@@ -21,7 +23,7 @@ export class UserQ {
   }
 
   async Insert(data: User): Promise<number> {
-    const [id] = await this.knex(userTableName).insert({
+    const [id] = await this.query.insert({
       name: data.name,
       age: data.age,
       role: data.role,
@@ -31,37 +33,50 @@ export class UserQ {
     return id;
   }
   async Get(): Promise<User | null> {
-    const result = await this.knex
-      .select('*').from(userTableName).first();
+    const result = await this.query
+      .select('*').first();
     return result;
   }
 
-  async Select(): Promise<User[]> {
-    const result = await this.knex.select('user.*').from(userTableName)
+  async Select(): Promise<User[]> { 
+    const result = await this.query.select('*');
+    
     return result;
   }
 
-  FilterByID(...id: number[]): UserQ {
-    this.knex.whereIn(userTableIdColumn, id);
+  async Delete() {
+    await this.query.delete();
+    
+    return;
+  }
+
+  FilterByID(id: number[]): UserQ {
+    this.query = this.query.whereIn(userTableIdColumn, id);
     return this;
   }
 
-  FilterByAge(...age: number[]): UserQ {
-    this.knex.whereIn(userTableAgeColumn, age);
+  FilterByAge(age: number[]): UserQ {
+    this.query = this.query.whereIn(userTableAgeColumn, age);
     return this;
   }
 
-  FilterByName(...name: string[]): UserQ {
-    this.knex.whereIn(userTableNameColumn, name.map((a) => a.toLowerCase()));
+
+  FilterByRole(role: boolean[]): UserQ {
+    this.query = this.query.whereIn(userTableRoleColumn, role);
+    return this;
+  }
+
+  FilterByName(name: string[]): UserQ {
+    this.query = this.query.whereIn(userTableNameColumn, name);
     return this;
   }
 
   Page(params: { limit: number; offset: number }): UserQ {
-    this.knex.limit(params.limit).offset(params.offset);
+    this.query = this.query.limit(params.limit).offset(params.offset);
     return this;
   }
 
   async Update(updater: User, id: number): Promise<void> {
-    await this.knex(userTableName).where(userTableIdColumn, id).update(updater);
+    await this.query.where(userTableIdColumn, id).update(updater);
   }
 }

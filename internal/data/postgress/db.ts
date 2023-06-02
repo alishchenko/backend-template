@@ -1,6 +1,6 @@
 import { UserQ } from './user';
-import knex, {Knex} from 'knex'
-import config from '../../../config'
+import knex, { Knex } from 'knex';
+import config from '../../../config';
 class DB {
 
   private db: Knex;
@@ -8,7 +8,7 @@ class DB {
   constructor() {
     this.db = knex({
       client: 'pg',
-      connection: config.DB_URL
+      connection: config.DB_URL,
     });    
   }
 

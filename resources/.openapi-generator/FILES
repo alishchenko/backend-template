@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 apis/UsersApi.ts
 apis/index.ts
 index.ts
@@ -10,6 +9,10 @@ models/Errors.ts
 models/ErrorsErrorsInner.ts
 models/GetUsersList200Response.ts
 models/GetUsersList400Response.ts
+models/UpdateUser.ts
+models/UpdateUserAllOf.ts
+models/UpdateUserAllOfAttributes.ts
+models/UpdateUserKey.ts
 models/UploadUser200Response.ts
 models/UploadUserRequest.ts
 models/User.ts

@@ -52,15 +52,23 @@ get:
     - $ref: '#/components/parameters/pageNumberParam'
     - $ref: '#/components/parameters/sortingParam'
     - in: query
-      name: 'filter[title]'
-      description: Title or a part of a title to be filtered with
+      name: 'filter[name]'
+      description: Name of User
       required: false
       schema:
         type: string
     - in: query
-      name: 'filter[network]'
+      name: 'filter[age]'
       required: false
-      description: Chain addresses to be filtered with
+      description: Age of user
+      schema:
+        type: array
+        items:
+          type: string
+    - in: query
+      name: 'filter[role]'
+      required: false
+      description: Role of user. True if admin
       schema:
         type: array
         items:

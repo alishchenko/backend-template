@@ -103,8 +103,8 @@
           },
           {
             "in": "query",
-            "name": "filter[title]",
-            "description": "Title or a part of a title to be filtered with",
+            "name": "filter[name]",
+            "description": "Name of User",
             "required": false,
             "schema": {
               "type": "string"
@@ -112,9 +112,21 @@
           },
           {
             "in": "query",
-            "name": "filter[network]",
+            "name": "filter[age]",
             "required": false,
-            "description": "Chain addresses to be filtered with",
+            "description": "Age of user",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[role]",
+            "required": false,
+            "description": "Role of user. True if admin",
             "schema": {
               "type": "array",
               "items": {
@@ -453,6 +465,58 @@
           }
         }
       },
+      "UpdateUser": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UpdateUserKey"
+          },
+          {
+            "type": "object",
+            "required": [
+              "attributes"
+            ],
+            "properties": {
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "User's name",
+                    "example": "John"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "description": "User's age",
+                    "example": 32
+                  },
+                  "role": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "UpdateUserKey": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "update-users"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "example": "1"
+          }
+        }
+      },
       "User": {
         "allOf": [
           {
@@ -475,12 +539,12 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "User's name",
+                    "description": "Name of user",
                     "example": "John"
                   },
                   "age": {
                     "type": "integer",
-                    "description": "User's age",
+                    "description": "Age of user",
                     "example": 32
                   },
                   "created_at": {
