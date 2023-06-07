@@ -1,0 +1,12 @@
+- Imports order
+- Interfaces only where needed
+- Case of naming (files, functions, class methods)
+- Aliases
+- Migrations script
+- Spacing
+- All packages that used only for developing should be in devDependencies (nodemon, types etc.)
+- Type that being used in more than 2 places should be exported from types folder (example in types)
+- Autoformating max-len eslint rule doesn't work, need to research how to fix it
+- All imports must be from modules 
+import DB from '../helpers/db' - not good
+import { DB } from '@/helpers' - good

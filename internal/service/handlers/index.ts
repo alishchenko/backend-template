@@ -1,5 +1,6 @@
-export * from './listUsers';
-export * from './createUser';
-export * from './getUser';
-export * from './deleteUser';
-export * from './updateUser';
+// FIXME: relative pathes to absolute pathes. '@/handlers/list-users'
+export * from './listUsers'
+export * from './create-user'
+export * from './getUser'
+export * from './deleteUser'
+export * from './updateUser'

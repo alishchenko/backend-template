@@ -1,6 +1,5 @@
-import { Request } from 'express';
-
+import { Request } from 'express'
 
 export function NewUserById(req: Request): number {
-  return Number(req.params.id);
+  return Number(req.params.id)
 }
