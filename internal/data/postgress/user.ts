@@ -1,5 +1,6 @@
-import { User } from '../user'
 import { Knex } from 'knex'
+
+import { UserDB } from '@/types'
 
 const
   userTableName = 'users',
@@ -17,11 +18,11 @@ export class UserQ {
     this.query = knex(userTableName)
   }
 
-  New(): UserQ {
+  new(): UserQ {
     return new UserQ(this.knex)
   }
 
-  async Insert(data: User): Promise<number> {
+  async insert(data: UserDB): Promise<number> {
     const [id] = await this.query.insert({
       name: data.name,
       age: data.age,
@@ -31,51 +32,51 @@ export class UserQ {
 
     return id
   }
-  // FIXME: check types
-  async Get(): Promise<User | null> {
+  
+  async get(): Promise<UserDB> {
     const result = await this.query
       .select('*').first()
     return result
   }
 
-  async Select(): Promise<User[]> { 
+  async select(): Promise<UserDB[]> { 
     const result = await this.query.select('*')
     
     return result
   }
 
-  async Delete() {
+  async delete() {
     await this.query.delete()
     
     return
   }
 
-  FilterByID(id: number[]): UserQ {
+  filterByID(id: number[]): UserQ {
     this.query = this.query.whereIn(userTableIdColumn, id)
     return this
   }
 
-  FilterByAge(age: number[]): UserQ {
+  filterByAge(age: number[]): UserQ {
     this.query = this.query.whereIn(userTableAgeColumn, age)
     return this
   }
 
-  FilterByRole(role: boolean[]): UserQ {
+  filterByRole(role: boolean[]): UserQ {
     this.query = this.query.whereIn(userTableRoleColumn, role)
     return this
   }
 
-  FilterByName(name: string[]): UserQ {
+  filterByName(name: string[]): UserQ {
     this.query = this.query.whereIn(userTableNameColumn, name)
     return this
   }
 
-  Page(params: { limit: number; offset: number }): UserQ {
+  page(params: { limit: number; offset: number }): UserQ {
     this.query = this.query.limit(params.limit).offset(params.offset)
     return this
   }
 
-  async Update(updater: User, id: number): Promise<void> {
+  async update(updater: UserDB, id: number): Promise<void> {
     await this.query.where(userTableIdColumn, id).update(updater)
   }
 }

@@ -1,3 +1,5 @@
-import { NewDB } from '../../data/postgress/db'
-const db = NewDB()
-export default db
+import { DB } from '@data/postgress/db'
+
+const db = new DB()
+
+export { db }

@@ -1,3 +1,3 @@
-export * from './postgress/user'
-export * from './postgress/db'
-export * from './user'
+export * from '@data/postgress/user'
+export * from '@data/postgress/db'
+export * from '@/types/user'

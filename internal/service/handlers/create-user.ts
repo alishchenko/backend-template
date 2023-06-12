@@ -1,16 +1,19 @@
 import { Request, Response } from 'express'
-import DB from '../helpers/db'
-import { logger } from '../helpers/log'
-import { NewCreateUserRequest } from '../requests/createUser'
-export async function CreateUser(req: Request, res: Response) {
-  const request = NewCreateUserRequest(req)
-  if (!request) {
 
+import { db, logger } from '@/helpers'
+import { newCreateUserRequest } from '@/requests'
+import { CreateUserTypeEnum } from '@resources'
+
+export async function createUser(req: Request, res: Response) {
+  const request = newCreateUserRequest(req)
+  const createdAt = new Date
+
+  if (!request) {
     res.status(400).send({ message: request })
   }
-  const createdAt = new Date
+
   try {
-    const id = await DB.Users().Insert({
+    const id = await db.users().insert({
       id: undefined,
       role: request.attributes.role,
       age:  request.attributes.age,
@@ -20,7 +23,7 @@ export async function CreateUser(req: Request, res: Response) {
   
     res.status(201).send({
       id: id,
-      type: 'users',
+      type: CreateUserTypeEnum.CreateUsers,
     })
   } catch (error) {
     logger.error(error)

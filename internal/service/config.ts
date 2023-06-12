@@ -1,8 +1,12 @@
-interface processEnv {
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+type processEnv = {
   [key: string]: string | undefined;
 }
 
-interface Config {
+type Config = {
   HOST: string | undefined;
   PORT: number | undefined;
   LEVEL_INFO: string | undefined;
@@ -27,4 +31,4 @@ const config: Config = {
   DB_URL: processEnv.DB_URL,
   DEFAULT_PAGE_LIMIT: 15,
 };
-export default config;
+export {config};

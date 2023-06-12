@@ -10,15 +10,15 @@ module.exports = {
     project: "./tsconfig.json",
   },
   plugins: ["@typescript-eslint"],
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
   rules: {
-    // TypeScript-specific rules
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-
     // 'prettier/prettier': [
     //   'warn',
     //   {
+    //     vueIndentScriptAndStyle: false,
     //     printWidth: 80,
     //     trailingComma: 'all',
     //     endOfLine: 'auto',
@@ -31,35 +31,39 @@ module.exports = {
     //   },
     // ],
 
+    // TypeScript-specific rules
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+
     // General rules
+    "max-len": [
+      1,
+      {
+        code: 80,
+        comments: 80,
+        // ignoreUrls: true,
+        // ignoyareStrings: true,
+        // ignoreTemplateLiterals: true,
+        // ignoreRegExpLiterals: true,
+      },
+    ],
     indent: ["error", 2, { SwitchCase: 1 }],
-    'arrow-parens': 0,
+    "arrow-parens": 0,
     "comma-dangle": [1, "always-multiline"],
     "object-curly-spacing": ["error", "always"],
     "no-console": "warn",
-    'object-curly-spacing': ['error', 'always'],
+    "object-curly-spacing": ["error", "always"],
     "no-unused-vars": "error",
     "no-undef": "error",
     "no-empty": "error",
     "no-constant-condition": "error",
     "no-empty-function": "error",
-    'linebreak-style': ['error', 'unix'],
-    'generator-star-spacing': 0,
-    'no-tabs': 2,
-    'max-len': [
-      1,
-      {
-        code: 80,
-        comments: 80,
-        ignoreUrls: true,
-        ignoreStrings: true,
-        ignoreTemplateLiterals: true,
-        ignoreRegExpLiterals: true,
-      },
-    ],
-    'no-multiple-empty-lines': [2, { max: 1, maxEOF: 0, maxBOF: 0 }],
-    quotes: [2, 'single', { avoidEscape: false }],
-    semi: [2, 'never'],
+    "linebreak-style": ["error", "unix"],
+    "generator-star-spacing": 0,
+    "no-tabs": 2,
+    "no-multiple-empty-lines": [2, { max: 1, maxEOF: 0, maxBOF: 0 }],
+    quotes: [2, "single", { avoidEscape: false }],
+    semi: [2, "never"],
 
     // Node.js-specific rules
     "no-process-exit": "error",
@@ -68,6 +72,6 @@ module.exports = {
   },
 
   globals: {
-    process: 'readonly', // Add this line to define process as a global variable
+    process: "readonly", // Add this line to define process as a global variable
   },
 };

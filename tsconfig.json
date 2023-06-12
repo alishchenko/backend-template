@@ -10,8 +10,12 @@
     "outDir": "dist",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["internal/*"],
-      "@resources/*": ["./resources/*"], 
+      "@/*": ["internal/service/*"],
+      "@": ["internal/service"],
+      "@resources": ["resources"], 
+      "@resources/*": ["resources/*"], 
+      "@data": ["internal/data"], 
+      "@data/*": ["internal/data/*"], 
     }
   },
   "include": [

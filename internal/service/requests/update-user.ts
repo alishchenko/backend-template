@@ -1,7 +1,8 @@
-import { UpdateUser, UpdateUserFromJSONTyped } from '../../../resources'
 import { Request } from 'express'
 
-export function NewUpdateUserRequest(req: Request): UpdateUser {
+import { UpdateUser, UpdateUserFromJSONTyped } from '@resources'
+
+export function newUpdateUserRequest(req: Request): UpdateUser {
   try {
     const request = UpdateUserFromJSONTyped(req.body.data, true)
     request.id = req.params.id
