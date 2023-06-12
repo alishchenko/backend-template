@@ -9,27 +9,14 @@ module.exports = {
     sourceType: "module",
     project: "./tsconfig.json",
   },
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "prettier"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "prettier",
   ],
   rules: {
-    // 'prettier/prettier': [
-    //   'warn',
-    //   {
-    //     vueIndentScriptAndStyle: false,
-    //     printWidth: 80,
-    //     trailingComma: 'all',
-    //     endOfLine: 'auto',
-    //     tabWidth: 2,
-    //     semi: false,
-    //     singleQuote: true,
-    //     bracketSpacing: true,
-    //     bracketSameLine: false,
-    //     arrowParens: 'avoid',
-    //   },
-    // ],
+    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 
     // TypeScript-specific rules
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -41,10 +28,10 @@ module.exports = {
       {
         code: 80,
         comments: 80,
-        // ignoreUrls: true,
-        // ignoyareStrings: true,
-        // ignoreTemplateLiterals: true,
-        // ignoreRegExpLiterals: true,
+        ignoreUrls: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+        ignoreRegExpLiterals: true,
       },
     ],
     indent: ["error", 2, { SwitchCase: 1 }],

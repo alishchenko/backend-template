@@ -1,20 +1,22 @@
 import { Request, Response } from 'express'
 
 import { UserQ } from '@data'
-import { db, createResource } from '@/helpers' 
+import { db, createResource } from '@/helpers'
 import { newListUsersRequest } from '@/requests'
 import { UserTypeEnum } from '@resources'
 import { ListUsersFilters } from '@/types'
 
-export async function listUsers(req: Request, res: Response){
+export async function listUsers(req: Request, res: Response) {
   const request = newListUsersRequest(req)
-  const users = await applyfilterUserParams(request).select() 
-  const userResources = users.map((user) => createResource({ type: UserTypeEnum.Users, ...user }))
+  const users = await applyfilterUserParams(request).select()
+  const userResources = users.map(user =>
+    createResource({ type: UserTypeEnum.Users, ...user }),
+  )
   res.status(200).send(userResources)
 }
-  
+
 function applyfilterUserParams(params: ListUsersFilters): UserQ {
-  const query =  db.users().new()
+  const query = db.users().new()
 
   if (params) {
     if (params.id) {
