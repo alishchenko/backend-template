@@ -1,2 +1,2 @@
-export type * from '@/types/user-db'
-export type * from '@/types/links'
+export * from '@/types/user-db'
+export * from '@/types/links'
