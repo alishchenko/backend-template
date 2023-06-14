@@ -1,5 +1,5 @@
 import { ResponseContext, RequestContext, HttpFile } from '../http/http';
-import { Configuration } from '../configuration';
+import { Configuration} from '../configuration'
 
 import { CreateUser } from '../models/CreateUser';
 import { CreateUserAllOf } from '../models/CreateUserAllOf';
@@ -20,8 +20,8 @@ import { UserAllOf } from '../models/UserAllOf';
 import { UserAllOfAttributes } from '../models/UserAllOfAttributes';
 import { UserKey } from '../models/UserKey';
 
-import { ObservableUsersApi } from './ObservableAPI';
-import { UsersApiRequestFactory, UsersApiResponseProcessor } from '../apis/UsersApi';
+import { ObservableUsersApi } from "./ObservableAPI";
+import { UsersApiRequestFactory, UsersApiResponseProcessor} from "../apis/UsersApi";
 
 export interface UsersApiDeleteUserRequest {
     /**
@@ -62,22 +62,22 @@ export interface UsersApiGetUsersListRequest {
     pageOrder?: 'asc' | 'desc'
     /**
      * Name of User
-     * @type string
+     * @type Array&lt;string&gt;
      * @memberof UsersApigetUsersList
      */
-    filterName?: string
+    filterName?: Array<string>
     /**
      * Age of user
-     * @type Array&lt;string&gt;
+     * @type Array&lt;number&gt;
      * @memberof UsersApigetUsersList
      */
-    filterAge?: Array<string>
+    filterAge?: Array<number>
     /**
      * Role of user. True if admin
-     * @type Array&lt;string&gt;
+     * @type Array&lt;boolean&gt;
      * @memberof UsersApigetUsersList
      */
-    filterRole?: Array<string>
+    filterRole?: Array<boolean>
 }
 
 export interface UsersApiUpdateUserRequest {
@@ -105,50 +105,50 @@ export interface UsersApiUploadUserRequest {
 }
 
 export class ObjectUsersApi {
-  private api: ObservableUsersApi;
+    private api: ObservableUsersApi
 
-  public constructor(configuration: Configuration, requestFactory?: UsersApiRequestFactory, responseProcessor?: UsersApiResponseProcessor) {
-    this.api = new ObservableUsersApi(configuration, requestFactory, responseProcessor);
-  }
+    public constructor(configuration: Configuration, requestFactory?: UsersApiRequestFactory, responseProcessor?: UsersApiResponseProcessor) {
+        this.api = new ObservableUsersApi(configuration, requestFactory, responseProcessor);
+    }
 
-  /**
+    /**
      * Delete User
      * @param param the request object
      */
-  public deleteUser(param: UsersApiDeleteUserRequest, options?: Configuration): Promise<void> {
-    return this.api.deleteUser(param.id,  options).toPromise();
-  }
+    public deleteUser(param: UsersApiDeleteUserRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteUser(param.id,  options).toPromise();
+    }
 
-  /**
+    /**
      * Get User
      * @param param the request object
      */
-  public getUser(param: UsersApiGetUserRequest, options?: Configuration): Promise<UploadUser200Response> {
-    return this.api.getUser(param.id,  options).toPromise();
-  }
+    public getUser(param: UsersApiGetUserRequest, options?: Configuration): Promise<UploadUser200Response> {
+        return this.api.getUser(param.id,  options).toPromise();
+    }
 
-  /**
+    /**
      * List Users
      * @param param the request object
      */
-  public getUsersList(param: UsersApiGetUsersListRequest = {}, options?: Configuration): Promise<GetUsersList200Response> {
-    return this.api.getUsersList(param.pageLimit, param.pageNumber, param.pageOrder, param.filterName, param.filterAge, param.filterRole,  options).toPromise();
-  }
+    public getUsersList(param: UsersApiGetUsersListRequest = {}, options?: Configuration): Promise<GetUsersList200Response> {
+        return this.api.getUsersList(param.pageLimit, param.pageNumber, param.pageOrder, param.filterName, param.filterAge, param.filterRole,  options).toPromise();
+    }
 
-  /**
+    /**
      * Update User
      * @param param the request object
      */
-  public updateUser(param: UsersApiUpdateUserRequest, options?: Configuration): Promise<void> {
-    return this.api.updateUser(param.id, param.uploadUserRequest,  options).toPromise();
-  }
+    public updateUser(param: UsersApiUpdateUserRequest, options?: Configuration): Promise<void> {
+        return this.api.updateUser(param.id, param.uploadUserRequest,  options).toPromise();
+    }
 
-  /**
+    /**
      * Upload User
      * @param param the request object
      */
-  public uploadUser(param: UsersApiUploadUserRequest = {}, options?: Configuration): Promise<UploadUser200Response> {
-    return this.api.uploadUser(param.uploadUserRequest,  options).toPromise();
-  }
+    public uploadUser(param: UsersApiUploadUserRequest = {}, options?: Configuration): Promise<UploadUser200Response> {
+        return this.api.uploadUser(param.uploadUserRequest,  options).toPromise();
+    }
 
 }

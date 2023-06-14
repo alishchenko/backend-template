@@ -145,15 +145,17 @@ let body:.UsersApiGetUsersListRequest = {
   pageNumber: 1,
   // 'asc' | 'desc' (optional)
   pageOrder: "desc",
-  // string | Name of User (optional)
-  filterName: "filter[name]_example",
-  // Array<string> | Age of user (optional)
-  filterAge: [
-    "filter[age]_example",
+  // Array<string> | Name of User (optional)
+  filterName: [
+    "filter[name]_example",
   ],
-  // Array<string> | Role of user. True if admin (optional)
+  // Array<number> | Age of user (optional)
+  filterAge: [
+    1,
+  ],
+  // Array<boolean> | Role of user. True if admin (optional)
   filterRole: [
-    "filter[role]_example",
+    true,
   ],
 };
 
@@ -170,9 +172,9 @@ Name | Type | Description  | Notes
  **pageLimit** | [**number**] |  | (optional) defaults to 15
  **pageNumber** | [**number**] | The number of a page to return. | (optional) defaults to undefined
  **pageOrder** | [**&#39;asc&#39; | &#39;desc&#39;**]**Array<&#39;asc&#39; &#124; &#39;desc&#39;>** |  | (optional) defaults to 'desc'
- **filterName** | [**string**] | Name of User | (optional) defaults to undefined
- **filterAge** | **Array&lt;string&gt;** | Age of user | (optional) defaults to undefined
- **filterRole** | **Array&lt;string&gt;** | Role of user. True if admin | (optional) defaults to undefined
+ **filterName** | **Array&lt;string&gt;** | Name of User | (optional) defaults to undefined
+ **filterAge** | **Array&lt;number&gt;** | Age of user | (optional) defaults to undefined
+ **filterRole** | **Array&lt;boolean&gt;** | Role of user. True if admin | (optional) defaults to undefined
 
 
 ### Return type

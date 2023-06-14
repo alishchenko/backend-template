@@ -2,8 +2,7 @@ import { Knex } from 'knex'
 
 import { UserDB } from '@/types'
 
-const
-  userTableName = 'users',
+const userTableName = 'users',
   userTableIdColumn = 'id',
   userTableNameColumn = 'name',
   userTableAgeColumn = 'age',
@@ -23,31 +22,32 @@ export class UserQ {
   }
 
   async insert(data: UserDB): Promise<number> {
-    const [id] = await this.query.insert({
-      name: data.name,
-      age: data.age,
-      role: data.role,
-      created_at: data.created_at,
-    }).returning(userTableIdColumn)
+    const [id] = await this.query
+      .insert({
+        name: data.name,
+        age: data.age,
+        role: data.role,
+        created_at: data.created_at,
+      })
+      .returning(userTableIdColumn)
 
     return id
   }
-  
+
   async get(): Promise<UserDB> {
-    const result = await this.query
-      .select('*').first()
+    const result = await this.query.select('*').first()
     return result
   }
 
-  async select(): Promise<UserDB[]> { 
+  async select(): Promise<UserDB[]> {
     const result = await this.query.select('*')
-    
+
     return result
   }
 
   async delete() {
     await this.query.delete()
-    
+
     return
   }
 
@@ -71,8 +71,15 @@ export class UserQ {
     return this
   }
 
-  page(params: { limit: number; offset: number }): UserQ {
-    this.query = this.query.limit(params.limit).offset(params.offset)
+  page(params: {
+    pageLimit: number
+    pageNumber: number
+    pageOrder: string
+  }): UserQ {
+    this.query = this.query
+      .limit(params.pageLimit)
+      .offset(params.pageNumber * params.pageLimit)
+      .orderBy(params.pageOrder)
     return this
   }
 

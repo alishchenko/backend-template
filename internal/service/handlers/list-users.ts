@@ -3,8 +3,7 @@ import { Request, Response } from 'express'
 import { UserQ } from '@data'
 import { db, createResource } from '@/helpers'
 import { newListUsersRequest } from '@/requests'
-import { UserTypeEnum } from '@resources'
-import { ListUsersFilters } from '@/types'
+import { UserTypeEnum, GetUsersListRequest } from '@resources'
 
 export async function listUsers(req: Request, res: Response) {
   const request = newListUsersRequest(req)
@@ -15,23 +14,25 @@ export async function listUsers(req: Request, res: Response) {
   res.status(200).send(userResources)
 }
 
-function applyfilterUserParams(params: ListUsersFilters): UserQ {
+function applyfilterUserParams(params: GetUsersListRequest): UserQ {
   const query = db.users().new()
 
-  if (params) {
-    if (params.id) {
-      query.filterByID(params.id)
-    }
-    if (params.name) {
-      query.filterByName(params.name)
-    }
-    if (params.age) {
-      query.filterByAge(params.age)
-    }
-    if (params.role) {
-      query.filterByRole(params.role)
-    }
+  if (!params) return query
+
+  if (params.filterName) {
+    query.filterByName(params.filterName)
   }
+  if (params.filterAge) {
+    query.filterByAge(params.filterAge)
+  }
+  if (params.filterRole) {
+    query.filterByRole(params.filterRole)
+  }
+  query.page({
+    pageLimit: params.pageLimit,
+    pageNumber: params.pageNumber,
+    pageOrder: params.pageOrder,
+  })
 
   return query
 }

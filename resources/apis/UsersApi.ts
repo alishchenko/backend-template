@@ -46,9 +46,9 @@ export interface GetUsersListRequest {
     pageLimit?: number;
     pageNumber?: number;
     pageOrder?: GetUsersListPageOrderEnum;
-    filterName?: string;
-    filterAge?: Array<string>;
-    filterRole?: Array<string>;
+    filterName?: Array<string>;
+    filterAge?: Array<number>;
+    filterRole?: Array<boolean>;
 }
 
 export interface UpdateUserRequest {
@@ -142,7 +142,7 @@ export class UsersApi extends runtime.BaseAPI {
             queryParameters['page[order]'] = requestParameters.pageOrder;
         }
 
-        if (requestParameters.filterName !== undefined) {
+        if (requestParameters.filterName) {
             queryParameters['filter[name]'] = requestParameters.filterName;
         }
 

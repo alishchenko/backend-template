@@ -1,4 +1,0 @@
-- add paginaion
-
-WHYYYYYYYY IT IS NOT WORK
-- Autoformating max-len eslint rule doesn't work, need to research how to fix it

@@ -1,4 +1,4 @@
-import { RequestContext } from '../http/http';
+import { RequestContext } from "../http/http";
 
 /**
  * Interface authentication schemes.
@@ -23,16 +23,16 @@ export interface TokenProvider {
 
 
 export type AuthMethods = {
-    'default'?: SecurityAuthentication,
+    "default"?: SecurityAuthentication,
 }
 
 export type ApiKeyConfiguration = string;
-export type HttpBasicConfiguration = { 'username': string, 'password': string };
+export type HttpBasicConfiguration = { "username": string, "password": string };
 export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
 export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
-    'default'?: SecurityAuthentication,
+    "default"?: SecurityAuthentication,
 }
 
 /**
@@ -40,12 +40,12 @@ export type AuthMethodsConfiguration = {
  *
  */
 export function configureAuthMethods(config: AuthMethodsConfiguration | undefined): AuthMethods {
-  const authMethods: AuthMethods = {};
+    let authMethods: AuthMethods = {}
 
-  if (!config) {
+    if (!config) {
+        return authMethods;
+    }
+    authMethods["default"] = config["default"]
+
     return authMethods;
-  }
-  authMethods['default'] = config['default'];
-
-  return authMethods;
 }

@@ -1,33 +1,31 @@
 import { Request, Response } from 'express'
 
-import { db, logger } from '@/helpers'
+import { db } from '@/helpers'
 import { newCreateUserRequest } from '@/requests'
 import { CreateUserTypeEnum } from '@resources'
+import { HTTP_STATUS_CODES } from '@/enums'
+import { getErrorResponse } from '@/helpers/errors'
 
 export async function createUser(req: Request, res: Response) {
-  const request = newCreateUserRequest(req)
-  const createdAt = new Date
-
-  if (!request) {
-    res.status(400).send({ message: request })
-  }
-
   try {
+    const request = newCreateUserRequest(req)
+    const createdAt = new Date()
+
     const id = await db.users().insert({
       id: undefined,
       role: request.attributes.role,
-      age:  request.attributes.age,
-      name:  request.attributes.name,
+      age: request.attributes.age,
+      name: request.attributes.name,
       created_at: createdAt,
     })
-  
-    res.status(201).send({
+
+    res.status(HTTP_STATUS_CODES.CREATED).send({
       id: id,
       type: CreateUserTypeEnum.CreateUsers,
     })
   } catch (error) {
-    logger.error(error)
-    res.status(500).send({ message: error })
+    res
+      .status(error.status ? error.status : HTTP_STATUS_CODES.INTERNAL_ERROR)
+      .send(getErrorResponse(error))
   }
-  
 }

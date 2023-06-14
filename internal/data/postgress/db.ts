@@ -12,7 +12,7 @@ export class DB {
     this.db = knex({
       client: databaseClient,
       connection: config.DB_URL,
-    })    
+    })
   }
 
   public users(): UserQ {

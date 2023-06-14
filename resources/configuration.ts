@@ -1,8 +1,8 @@
-import { HttpLibrary } from './http/http';
-import { Middleware, PromiseMiddleware, PromiseMiddlewareWrapper } from './middleware';
-import { IsomorphicFetchHttpLibrary as DefaultHttpLibrary } from './http/isomorphic-fetch';
-import { BaseServerConfiguration, server1 } from './servers';
-import { configureAuthMethods, AuthMethods, AuthMethodsConfiguration } from './auth/auth';
+import { HttpLibrary } from "./http/http";
+import { Middleware, PromiseMiddleware, PromiseMiddlewareWrapper } from "./middleware";
+import { IsomorphicFetchHttpLibrary as DefaultHttpLibrary } from "./http/isomorphic-fetch";
+import { BaseServerConfiguration, server1 } from "./servers";
+import { configureAuthMethods, AuthMethods, AuthMethodsConfiguration } from "./auth/auth";
 
 export interface Configuration {
     readonly baseServer: BaseServerConfiguration;
@@ -67,16 +67,16 @@ export interface ConfigurationParameters {
  * @param conf partial configuration
  */
 export function createConfiguration(conf: ConfigurationParameters = {}): Configuration {
-  const configuration: Configuration = {
-    baseServer: conf.baseServer !== undefined ? conf.baseServer : server1,
-    httpApi: conf.httpApi || new DefaultHttpLibrary(),
-    middleware: conf.middleware || [],
-    authMethods: configureAuthMethods(conf.authMethods),
-  };
-  if (conf.promiseMiddleware) {
-    conf.promiseMiddleware.forEach(
-      m => configuration.middleware.push(new PromiseMiddlewareWrapper(m)),
-    );
-  }
-  return configuration;
+    const configuration: Configuration = {
+        baseServer: conf.baseServer !== undefined ? conf.baseServer : server1,
+        httpApi: conf.httpApi || new DefaultHttpLibrary(),
+        middleware: conf.middleware || [],
+        authMethods: configureAuthMethods(conf.authMethods)
+    };
+    if (conf.promiseMiddleware) {
+        conf.promiseMiddleware.forEach(
+            m => configuration.middleware.push(new PromiseMiddlewareWrapper(m))
+        );
+    }
+    return configuration;
 }

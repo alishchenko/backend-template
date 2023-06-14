@@ -7,7 +7,7 @@ const myArgs = process.argv.slice(2)
 
 async function main() {
   if (myArgs[0] === 'run' && myArgs[1] === 'service') {
-    try {         
+    try {
       run()
     } catch (error) {
       logger.error('Error occured:', error.message as string)
@@ -15,7 +15,6 @@ async function main() {
       setTimeout(() => {
         run()
       }, 5000)
-            
     }
   }
 }

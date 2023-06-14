@@ -6,3 +6,8 @@ migrate up
 
 migrate down
  db-migrate down --migrations-dir ./internal/assets/migrations
+
+ generate
+ npx openapi-generator-cli generate \
+    -i ./docs/web_deploy/openapi.yaml \
+    -g typescript-fetch -o ./resources

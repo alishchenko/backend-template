@@ -1,5 +1,10 @@
+import { BadRequestError } from '@/helpers/errors'
 import { Request } from 'express'
 
 export function newUserById(req: Request): number {
-  return Number(req.params.id)
+  const id = Number(req.params.id)
+
+  if (id <= 0 || isNaN(id)) throw new BadRequestError('id is invalid')
+
+  return id
 }

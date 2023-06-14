@@ -107,7 +107,10 @@
             "description": "Name of User",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
@@ -118,7 +121,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "integer"
               }
             }
           },
@@ -130,7 +133,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "boolean"
               }
             }
           }

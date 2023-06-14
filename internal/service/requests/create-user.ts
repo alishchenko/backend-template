@@ -1,14 +1,17 @@
 import { Request } from 'express'
 
-import { CreateUserFromJSONTyped, CreateUser } from '@resources'
+import { CreateUserFromJSON, CreateUser } from '@resources'
+import { BadRequestError } from '@/helpers/errors'
 
 export function newCreateUserRequest(r: Request): CreateUser {
-  try {
-    const request = CreateUserFromJSONTyped(r.body.data, true)
-    return request
-        
-  } catch (error) {
-    // FIXME: throw error wih status code 400
-    return error
-  }
+  const request = CreateUserFromJSON(r.body.data)
+
+  if (
+    typeof request.attributes.name !== 'string' ||
+    typeof request.attributes.age !== 'number' ||
+    typeof request.attributes.role !== 'boolean'
+  )
+    throw new BadRequestError('failed to parce create user request')
+
+  return request
 }

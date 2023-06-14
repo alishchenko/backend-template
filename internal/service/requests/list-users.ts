@@ -1,38 +1,50 @@
 import { Request } from 'express'
+import { GetUsersListRequest, GetUsersListPageOrderEnum } from '@resources'
+import { config } from '@/config'
 
-export type ListUsersFilters = {
-  id?: number[];
-  name?: string[];
-  age?: number[];
-  role?: boolean[];
-}
+export function newListUsersRequest(req: Request): GetUsersListRequest {
+  const params = req.query
+  if (!params) return
 
-export function newListUsersRequest(req: Request): ListUsersFilters {
-  const filter = req.query.filter as ListUsersFilters
+  let request: GetUsersListRequest
+  const pageParams = params.page as typeof params
+  const filterParams = params.filter as typeof params
 
-  if (!filter) return
-
-  if (filter.id) {
-    filter.id = [...(filter.id instanceof Array 
-      ? filter.id.map((id)=> id as number) 
-      : [filter.id as number])]
+  if (params.page) {
+    request.pageLimit = pageParams.limit
+      ? Number(pageParams.limit)
+      : config.DEFAULT_PAGE_LIMIT
+    request.pageNumber = Number(pageParams.number)
+      ? Number(pageParams.number)
+      : 0
+    request.pageOrder = pageParams.order
+      ? (pageParams.order as GetUsersListPageOrderEnum)
+      : 'desc'
   }
 
-  if (filter.name) {
-    filter.name = [
-      ...(filter.name instanceof Array ? filter.name : [filter.name]),
+  if (!filterParams) return
+
+  if (filterParams.name) {
+    request.filterName = [
+      ...(filterParams.name instanceof Array
+        ? (filterParams.name as string[])
+        : [filterParams.name as string]),
     ]
   }
-  if (filter.age) {
-    filter.age = [...(filter.age instanceof Array 
-      ? filter.age 
-      : [filter.age as number])]
-  }
-  if (filter.role) {
-    filter.role = [
-      ...(filter.role instanceof Array ? filter.role : [filter.role]),
+  if (filterParams.age) {
+    request.filterAge = [
+      ...(filterParams.age instanceof Array
+        ? filterParams.age.map(Number)
+        : [Number(filterParams.age)]),
     ]
   }
-  
-  return filter
+  if (filterParams.role) {
+    request.filterRole = [
+      ...(filterParams.role instanceof Array
+        ? filterParams.role.map(Boolean)
+        : [Boolean(filterParams.role)]),
+    ]
+  }
+
+  return params
 }
