@@ -1,13 +1,13 @@
 import { Request, Response } from 'express'
 import { RequestError, getErrorResponse } from '@/helpers/errors'
-import { db, createResource } from '@/helpers'
+import { db, createResponse } from '@/helpers'
 import { HTTP_STATUS_CODES } from '@/enums'
-import { newUserById } from '@/requests'
+import { newUserByIdRequest } from '@/requests'
 import { UserTypeEnum } from '@resources'
 
 export async function getUserById(req: Request, res: Response) {
   try {
-    const id = newUserById(req)
+    const id = newUserByIdRequest(req)
 
     const user = await db.users().new().filterByID([id]).get()
     if (typeof user === 'undefined') {
@@ -15,10 +15,10 @@ export async function getUserById(req: Request, res: Response) {
     }
     res
       .status(HTTP_STATUS_CODES.OK)
-      .send(createResource({ type: UserTypeEnum.Users, ...user }))
+      .send(createResponse(user, UserTypeEnum.Users))
   } catch (error) {
     res
-      .status(error.status ? error.status : HTTP_STATUS_CODES.INTERNAL_ERROR)
+      .status(error.status ?? HTTP_STATUS_CODES.INTERNAL_ERROR)
       .send(getErrorResponse(error))
     return
   }

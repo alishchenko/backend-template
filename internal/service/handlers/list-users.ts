@@ -1,21 +1,24 @@
 import { Request, Response } from 'express'
 
 import { UserQ } from '@data'
-import { db, createResource } from '@/helpers'
+import { db, createListResponse } from '@/helpers'
 import { newListUsersRequest } from '@/requests'
 import { UserTypeEnum, GetUsersListRequest } from '@resources'
 
 export async function listUsers(req: Request, res: Response) {
   const request = newListUsersRequest(req)
   const users = await applyfilterUserParams(request).select()
-  const userResources = users.map(user =>
-    createResource({ type: UserTypeEnum.Users, ...user }),
+  const userResources = createListResponse(
+    users,
+    UserTypeEnum.Users,
+    req,
+    request.pageNumber,
+    request.pageLimit,
+    request.pageOrder,
   )
+
   res.status(200).send(userResources)
 }
-
-// TODO: pagination
-
 function applyfilterUserParams(params: GetUsersListRequest): UserQ {
   const query = db.users().new()
 

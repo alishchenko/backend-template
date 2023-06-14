@@ -22,7 +22,7 @@ export class UserQ {
   }
 
   async insert(data: UserDB): Promise<number> {
-    const [id] = await this.query
+    const [{ id }] = await this.query
       .insert({
         name: data.name,
         age: data.age,
@@ -79,7 +79,7 @@ export class UserQ {
     this.query = this.query
       .limit(params.pageLimit)
       .offset(params.pageNumber * params.pageLimit)
-      .orderBy(params.pageOrder)
+      .orderBy('id', params.pageOrder)
     return this
   }
 

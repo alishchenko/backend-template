@@ -2,37 +2,30 @@ import { Request } from 'express'
 import { GetUsersListRequest, GetUsersListPageOrderEnum } from '@resources'
 import { config } from '@/config'
 
-// TODO check return types of the functions
 export function newListUsersRequest(req: Request): GetUsersListRequest {
   const params = req.query
 
-  if (!params) return
-
-  let request: GetUsersListRequest
+  const request: GetUsersListRequest = {
+    pageLimit: config.DEFAULT_PAGE_LIMIT,
+    pageNumber: 0,
+    pageOrder: 'desc',
+  }
 
   const pageParams = params.page as typeof params
   const filterParams = params.filter as typeof params
 
   if (params.page) {
-    request.pageLimit = pageParams.limit
-      ? Number(pageParams.limit)
-      : config.DEFAULT_PAGE_LIMIT
-    request.pageNumber = Number(pageParams.number)
-      ? Number(pageParams.number)
-      : 0
-    request.pageOrder = pageParams.order
-      ? (pageParams.order as GetUsersListPageOrderEnum)
-      : 'desc'
+    if (pageParams.pageNumber) request.pageNumber = Number(pageParams.number)
+    if (pageParams.pageLimit) request.pageLimit = Number(pageParams.limit)
+    if (pageParams.pageOrder) pageParams.order as GetUsersListPageOrderEnum
   }
 
   if (!filterParams) return
-
   if (filterParams.name) {
-    request.filterName = [
-      ...(filterParams.name instanceof Array
+    request.filterName =
+      filterParams.name instanceof Array
         ? (filterParams.name as string[])
-        : [filterParams.name as string]),
-    ]
+        : [filterParams.name as string]
   }
   if (filterParams.age) {
     request.filterAge = [
@@ -49,5 +42,5 @@ export function newListUsersRequest(req: Request): GetUsersListRequest {
     ]
   }
 
-  return params
+  return request
 }
