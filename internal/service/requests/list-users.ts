@@ -2,11 +2,14 @@ import { Request } from 'express'
 import { GetUsersListRequest, GetUsersListPageOrderEnum } from '@resources'
 import { config } from '@/config'
 
+// TODO check return types of the functions
 export function newListUsersRequest(req: Request): GetUsersListRequest {
   const params = req.query
+
   if (!params) return
 
   let request: GetUsersListRequest
+
   const pageParams = params.page as typeof params
   const filterParams = params.filter as typeof params
 

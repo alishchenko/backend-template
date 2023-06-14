@@ -20,7 +20,6 @@
   },
   "include": [
     "internal/**/*.ts",
-    "resources/**/*.ts",
 
     "main.ts"
   ],

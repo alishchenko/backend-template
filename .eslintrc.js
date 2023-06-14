@@ -21,6 +21,7 @@ module.exports = {
     // TypeScript-specific rules
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "error",
 
     // General rules
     "max-len": [
@@ -40,7 +41,6 @@ module.exports = {
     "object-curly-spacing": ["error", "always"],
     "no-console": "warn",
     "object-curly-spacing": ["error", "always"],
-    "no-unused-vars": "error",
     "no-undef": "error",
     "no-empty": "error",
     "no-constant-condition": "error",

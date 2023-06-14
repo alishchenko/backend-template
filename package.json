@@ -8,7 +8,7 @@
     "start": "node main.ts run service",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "generate-docs": "npx openapi-generator-cli generate -i ./docs/web_deploy/openapi.yaml -g typescript-fetch -o ./resources",
+    "generate-docs": "npx openapi-generator-cli generate -i ./docs/web_deploy/openapi.yaml -g typescript-fetch -o ./resources"
   },
   "gitHooks": {
     "pre-commit": "yarn lint:fix"
@@ -43,6 +43,7 @@
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4",
-    "winston": "^3.9.0"
+    "winston": "^3.9.0",
+    "yorkie": "^2.0.0"
   }
 }

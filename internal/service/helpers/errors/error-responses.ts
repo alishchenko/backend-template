@@ -35,6 +35,7 @@ export function getErrorResponse(error: RequestError): ErrorResponse {
           detail: error.message,
         },
       }
+    case HTTP_STATUS_CODES.INTERNAL_ERROR:
     default:
       return {
         errors: {

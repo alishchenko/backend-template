@@ -11,7 +11,7 @@ export function newCreateUserRequest(r: Request): CreateUser {
     typeof request.attributes.age !== 'number' ||
     typeof request.attributes.role !== 'boolean'
   )
-    throw new BadRequestError('failed to parce create user request')
+    throw new BadRequestError('failed to parse create user request')
 
   return request
 }

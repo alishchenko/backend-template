@@ -1,6 +1,7 @@
 import { BadRequestError } from '@/helpers/errors'
 import { Request } from 'express'
 
+// FIXME: newUserByIdRequest
 export function newUserById(req: Request): number {
   const id = Number(req.params.id)
 

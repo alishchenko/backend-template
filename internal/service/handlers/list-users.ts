@@ -14,6 +14,8 @@ export async function listUsers(req: Request, res: Response) {
   res.status(200).send(userResources)
 }
 
+// TODO: pagination
+
 function applyfilterUserParams(params: GetUsersListRequest): UserQ {
   const query = db.users().new()
 
