@@ -1,0 +1,13 @@
+{
+    "type": "postgres",
+    "url": "postgresql://user:user@localhost:5433/user?sslmode=disable",
+    "synchronize": false,
+    "logging": true,
+    "migrationsRun": false,
+    "entities": ["internal/data/entity/**/*.ts"],
+    "migrations": ["internal/data/migrations/**/*.ts"],
+    "cli": {
+        "entitiesDir": "internal/data/entity",
+        "migrationsDir": "internal/data/migrations"
+    }
+}

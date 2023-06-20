@@ -11,8 +11,8 @@ paths:
     post:
       tags:
         - Users
-      summary: Upload User
-      operationId: uploadUser
+      summary: Create User
+      operationId: createUser
       requestBody:
         content:
           application/json:
@@ -22,7 +22,7 @@ paths:
                 data:
                   $ref: '#/components/schemas/CreateUser'
       responses:
-        '200':
+        '201':
           description: Success
           content:
             application/json:
@@ -97,19 +97,11 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/User'
+                  links:
+                    type: object
+                    $ref: '#/components/schemas/Links'
         '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - errors
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Errors'
+          $ref: '#/components/responses/BadRequestError'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -297,6 +289,30 @@ components:
                   - 404
                   - 409
                   - 500
+    Links:
+      description: 'Standard JSON:API links'
+      type: object
+      properties:
+        first:
+          type: string
+          description: link on first page
+          example: '/users?page[number]=0&page[limit]=15&page[order]=DESC'
+        previous:
+          type: string
+          description: link on previous page
+          example: '/users?page[number]=1&page[limit]=15&page[order]=DESC'
+        self:
+          type: string
+          description: link on self
+          example: '/users?page[number]=2&page[limit]=15&page[order]=DESC'
+        next:
+          type: string
+          description: link on next page
+          example: '/users?page[number]=3&page[limit]=15&page[order]=DESC'
+        last:
+          type: string
+          description: link on last page
+          example: '/users?page[number]=15&page[limit]=15&page[order]=DESC'
     UpdateUser:
       allOf:
         - $ref: '#/components/schemas/UpdateUserKey'
@@ -374,6 +390,19 @@ components:
           type: string
           example: '1'
   responses:
+    BadRequestError:
+      description: Bad Request Error
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Errors'
     InternalError:
       description: Internal Server Error
       content:
@@ -425,7 +454,7 @@ components:
       schema:
         type: string
         enum:
-          - asc
-          - desc
-        default: desc
+          - ASC
+          - DESC
+        default: DESC
         description: 'Order of records on the page. If sortingParam is not specified, order of records is by default sorted by ID.'

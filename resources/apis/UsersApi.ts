@@ -15,24 +15,28 @@
 
 import * as runtime from '../runtime';
 import type {
+  CreateUser201Response,
+  CreateUserRequest,
   Errors,
   GetUsersList200Response,
   GetUsersList400Response,
-  UploadUser200Response,
-  UploadUserRequest,
 } from '../models';
 import {
+    CreateUser201ResponseFromJSON,
+    CreateUser201ResponseToJSON,
+    CreateUserRequestFromJSON,
+    CreateUserRequestToJSON,
     ErrorsFromJSON,
     ErrorsToJSON,
     GetUsersList200ResponseFromJSON,
     GetUsersList200ResponseToJSON,
     GetUsersList400ResponseFromJSON,
     GetUsersList400ResponseToJSON,
-    UploadUser200ResponseFromJSON,
-    UploadUser200ResponseToJSON,
-    UploadUserRequestFromJSON,
-    UploadUserRequestToJSON,
 } from '../models';
+
+export interface CreateUserOperationRequest {
+    createUserRequest?: CreateUserRequest;
+}
 
 export interface DeleteUserRequest {
     id: number;
@@ -53,17 +57,42 @@ export interface GetUsersListRequest {
 
 export interface UpdateUserRequest {
     id: number;
-    uploadUserRequest?: UploadUserRequest;
-}
-
-export interface UploadUserOperationRequest {
-    uploadUserRequest?: UploadUserRequest;
+    createUserRequest?: CreateUserRequest;
 }
 
 /**
  * 
  */
 export class UsersApi extends runtime.BaseAPI {
+
+    /**
+     * Create User
+     */
+    async createUserRaw(requestParameters: CreateUserOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateUser201Response>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/integrations/users`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateUserRequestToJSON(requestParameters.createUserRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateUser201ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Create User
+     */
+    async createUser(requestParameters: CreateUserOperationRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateUser201Response> {
+        const response = await this.createUserRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      * Delete User
@@ -97,7 +126,7 @@ export class UsersApi extends runtime.BaseAPI {
     /**
      * Get User
      */
-    async getUserRaw(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UploadUser200Response>> {
+    async getUserRaw(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateUser201Response>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getUser.');
         }
@@ -113,13 +142,13 @@ export class UsersApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UploadUser200ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateUser201ResponseFromJSON(jsonValue));
     }
 
     /**
      * Get User
      */
-    async getUser(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UploadUser200Response> {
+    async getUser(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateUser201Response> {
         const response = await this.getUserRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -193,7 +222,7 @@ export class UsersApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: UploadUserRequestToJSON(requestParameters.uploadUserRequest),
+            body: CreateUserRequestToJSON(requestParameters.createUserRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -206,42 +235,13 @@ export class UsersApi extends runtime.BaseAPI {
         await this.updateUserRaw(requestParameters, initOverrides);
     }
 
-    /**
-     * Upload User
-     */
-    async uploadUserRaw(requestParameters: UploadUserOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UploadUser200Response>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        const response = await this.request({
-            path: `/integrations/users`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: UploadUserRequestToJSON(requestParameters.uploadUserRequest),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UploadUser200ResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Upload User
-     */
-    async uploadUser(requestParameters: UploadUserOperationRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UploadUser200Response> {
-        const response = await this.uploadUserRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
 }
 
 /**
  * @export
  */
 export const GetUsersListPageOrderEnum = {
-    Asc: 'asc',
-    Desc: 'desc'
+    Asc: 'ASC',
+    Desc: 'DESC'
 } as const;
 export type GetUsersListPageOrderEnum = typeof GetUsersListPageOrderEnum[keyof typeof GetUsersListPageOrderEnum];

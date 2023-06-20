@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODES } from '@/enums'
+import { HTTP_STATUS_CODES } from '@/dtos'
 import { RequestError } from '@/helpers/errors'
 
 type ErrorResponse = {

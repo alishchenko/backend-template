@@ -5,8 +5,8 @@ import { config } from '@/config'
 import { logger } from '@/helpers'
 import { router } from '@/router'
 
-const PORT = config.PORT ?? 8080
-const HOST = config.HOST ?? 'localhost'
+const PORT = config.PORT
+const HOST = config.HOST
 const URL = `http://${HOST}:${PORT}`
 
 const app = express()

@@ -35,7 +35,7 @@ module.exports = {
         ignoreRegExpLiterals: true,
       },
     ],
-    indent: ["error", 2, { SwitchCase: 1 }],
+    indent: "off",
     "arrow-parens": 0,
     "comma-dangle": [1, "always-multiline"],
     "object-curly-spacing": ["error", "always"],
@@ -56,6 +56,7 @@ module.exports = {
     "no-process-exit": "error",
     "no-process-env": "error",
     "no-restricted-modules": ["error", "child_process", "fs"],
+    
   },
 
   globals: {

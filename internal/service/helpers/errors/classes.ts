@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODES } from '@/enums'
+import { HTTP_STATUS_CODES } from '@/dtos'
 
 export class RequestError extends Error {
   status: HTTP_STATUS_CODES

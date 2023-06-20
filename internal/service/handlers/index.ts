@@ -1,5 +1,0 @@
-export * from '@/handlers/list-users'
-export * from '@/handlers/create-user'
-export * from '@/handlers/get-user'
-export * from '@/handlers/delete-user'
-export * from '@/handlers/update-user'

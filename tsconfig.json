@@ -12,11 +12,12 @@
     "paths": {
       "@/*": ["internal/service/*"],
       "@": ["internal/service"],
-      "@resources": ["resources"], 
-      "@resources/*": ["resources/*"], 
       "@data": ["internal/data"], 
       "@data/*": ["internal/data/*"], 
-    }
+      "@resources": ["resources"], 
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": [
     "internal/**/*.ts",

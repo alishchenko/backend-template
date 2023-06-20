@@ -13,6 +13,12 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { Links } from './Links';
+import {
+    LinksFromJSON,
+    LinksFromJSONTyped,
+    LinksToJSON,
+} from './Links';
 import type { User } from './User';
 import {
     UserFromJSON,
@@ -32,6 +38,12 @@ export interface GetUsersList200Response {
      * @memberof GetUsersList200Response
      */
     data?: Array<User>;
+    /**
+     * 
+     * @type {Links}
+     * @memberof GetUsersList200Response
+     */
+    links?: Links;
 }
 
 /**
@@ -54,6 +66,7 @@ export function GetUsersList200ResponseFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'data': !exists(json, 'data') ? undefined : ((json['data'] as Array<any>).map(UserFromJSON)),
+        'links': !exists(json, 'links') ? undefined : json['links'],
     };
 }
 
@@ -67,6 +80,7 @@ export function GetUsersList200ResponseToJSON(value?: GetUsersList200Response | 
     return {
         
         'data': value.data === undefined ? undefined : ((value.data as Array<any>).map(UserToJSON)),
+        'links': value.links,
     };
 }
 
