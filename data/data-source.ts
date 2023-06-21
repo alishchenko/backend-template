@@ -7,6 +7,6 @@ export const AppDataSource = new DataSource({
   url: config.DB_URL,
   synchronize: false,
   logging: true,
-  entities: ['./internal/data/entity/*.ts'],
-  migrations: ['./internal/data/migrations/*.ts'],
+  entities: ['./data/entity/*.ts'],
+  migrations: ['./data/migrations/*.ts'],
 })

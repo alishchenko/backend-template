@@ -10,16 +10,16 @@
     "outDir": "dist",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["internal/service/*"],
-      "@": ["internal/service"],
-      "@data": ["internal/data"], 
-      "@data/*": ["internal/data/*"],
+      "@/*": ["service/*"],
+      "@": ["service"],
+      "@data": ["data"], 
+      "@data/*": ["data/*"],
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
   "include": [
-    "internal/**/*.ts",
+    "**/*.ts",
 
     "main.ts"
   ],

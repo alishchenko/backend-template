@@ -1,8 +1,14 @@
+[![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)](https://www.typescriptlang.org/)
+[![node.js](https://badgen.net/badge/-/NodeJS/green?&label)](https://nodejs.org/en/about/)
+[![express](https://img.shields.io/npm/v/express?label=express)](http://expressjs.com/)
+[![typeorm](https://img.shields.io/npm/v/typeorm?label=typeorm)](https://typeorm.io/)
+[![eslint](https://img.shields.io/npm/v/eslint?label=eslint)](https://eslint.org/docs/latest/use/getting-started/)
+
 # Backend TypeScript Template
 
 This is a template for building a backend server using TypeScript.
 
-## Features
+## Tech Stack
 
 - TypeScript
 - Node.js
@@ -25,12 +31,12 @@ To get started with this template, follow these steps:
 
 To work with the database, follow these steps:
 
-1. Add or modify entities in `./internal/data/entity`
+1. Add or modify entities in `./data/entity`. More about Typeorm entities you can read in [Typeorm Documentation](https://orkhan.gitbook.io/typeorm/docs/entities)
 
 2. Generate a migration:
    ```
-   npm run migration:generate ./internal/data/migration/<migration-name> 
-   (or yarn migration:generate ./internal/data/migration/<migration-name>)
+   npm run migration:generate ./data/migration/<migration-name> 
+   (or yarn migration:generate ./data/migration/<migration-name>)
    ```
 
 2. Run the migrations (migrate up):
