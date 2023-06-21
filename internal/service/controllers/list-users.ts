@@ -10,6 +10,7 @@ export async function listUsers(req: Request, res: Response) {
   request.validateRequest()
 
   const users = await getUsers(request)
+
   const userResources = UserListToResponse(req, request, users)
 
   res.status(200).send(userResources)

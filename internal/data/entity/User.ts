@@ -14,6 +14,6 @@ export class User {
   @Column()
   role: boolean
 
-  @Column()
-  created_at: Date
+  @Column({ name: 'created_at' })
+  createdAt: Date
 }

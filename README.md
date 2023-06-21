@@ -17,15 +17,20 @@ To get started with this template, follow these steps:
 1. Clone the repository that uses this template.
 2. Create an `.env` file. You can find an example in `env.example`.
 3. Install the required dependencies by running `npm install` (or `yarn install`).
-4. Start the service by running `npm run dev` (or `yarn dev`).
+4. Add database container `docker-compose up -d`.
+5. Run the migrations `npm run migrate:up` (or `yarn migrate:up`).
+6. Start the service by running `npm run dev` (or `yarn dev`).
 
 ## Working with the Database
 
 To work with the database, follow these steps:
 
-1. Create a migration:
+1. Add or modify entities in `./internal/data/entity`
+
+2. Generate a migration:
    ```
-   npm run migration:create (or yarn migration:create)
+   npm run migration:generate ./internal/data/migration/<migration-name> 
+   (or yarn migration:generate ./internal/data/migration/<migration-name>)
    ```
 
 2. Run the migrations (migrate up):

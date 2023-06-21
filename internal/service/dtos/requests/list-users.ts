@@ -2,7 +2,7 @@ import { Request } from 'express'
 
 import { validate } from 'class-validator'
 
-import { GetUsersListPageOrderEnum } from '@resources'
+import { PAGE_ORDER } from '@/dtos'
 import { config } from '@/config'
 import { BadRequestError } from '@/helpers/errors'
 
@@ -15,13 +15,13 @@ export class ListUsersRequest {
   page: {
     limit: number
     number: number
-    order: GetUsersListPageOrderEnum
+    order: PAGE_ORDER
   }
   constructor(req: Request) {
     this.page = {
       limit: config.DEFAULT_PAGE_LIMIT,
       number: 0,
-      order: GetUsersListPageOrderEnum.Desc,
+      order: PAGE_ORDER.DESC,
     }
     this.filter = {
       name: [],
@@ -36,7 +36,7 @@ export class ListUsersRequest {
     if (params.page) {
       if (pageParams.number) this.page.number = Number(pageParams.number)
       if (pageParams.limit) this.page.limit = Number(pageParams.limit)
-      if (pageParams.order) this.page.order as GetUsersListPageOrderEnum
+      if (pageParams.order) this.page.order as PAGE_ORDER
     }
 
     if (!filterParams) return

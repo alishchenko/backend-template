@@ -1,11 +1,19 @@
-import { GetUsersListPageOrderEnum, Links } from '@resources'
+import { PAGE_ORDER } from '@/dtos'
+
+export type Links = {
+  first?: string
+  previous?: string
+  self?: string
+  next?: string
+  last?: string
+}
 
 export function getLinks(
   originalUrl: string,
   page: {
     limit: number
     number: number
-    order: GetUsersListPageOrderEnum
+    order: PAGE_ORDER
   },
 ): Links {
   // Create a URL object with the link

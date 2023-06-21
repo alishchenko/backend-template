@@ -4,6 +4,7 @@ import express from 'express'
 import { config } from '@/config'
 import { logger } from '@/helpers'
 import { router } from '@/router'
+import { AppDataSource } from '@data'
 
 const PORT = config.PORT
 const HOST = config.HOST
@@ -14,6 +15,8 @@ const server = http.createServer(app)
 
 app.use(express.json({ limit: '50mb' }))
 app.use(router)
+
+AppDataSource.initialize().catch(error => logger.debug(error))
 
 export const run = function () {
   server.listen(PORT, HOST, () => logger.debug(URL))

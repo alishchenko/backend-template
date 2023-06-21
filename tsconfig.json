@@ -13,8 +13,7 @@
       "@/*": ["internal/service/*"],
       "@": ["internal/service"],
       "@data": ["internal/data"], 
-      "@data/*": ["internal/data/*"], 
-      "@resources": ["resources"], 
+      "@data/*": ["internal/data/*"],
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true

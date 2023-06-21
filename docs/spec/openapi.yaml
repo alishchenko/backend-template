@@ -1,8 +1,0 @@
-openapi: 3.0.0
-info:
-  version: 1.0.0
-  title: users-svc
-  description: ''
-servers:
-  - url: 'https://localhost:3000'
-    description: TS Template API
