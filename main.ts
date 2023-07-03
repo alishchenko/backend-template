@@ -1,7 +1,8 @@
 import 'module-alias/register'
+import 'reflect-metadata'
 
-import { logger } from '@/helpers'
 import { run } from '@'
+import { createLogger } from '@/helpers'
 
 const myArgs = process.argv.slice(2)
 
@@ -10,6 +11,7 @@ async function main() {
     try {
       run()
     } catch (error) {
+      const logger = createLogger()
       logger.error('Error occured:', error.message as string)
       logger.info('Trying to restart...')
       setTimeout(() => {

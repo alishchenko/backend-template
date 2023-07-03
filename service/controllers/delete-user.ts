@@ -1,8 +1,8 @@
-import { Request, Response } from 'express'
-
 import { AppDataSource } from '@data'
 import { User } from '@data/entity'
-import { UserByIdRequest, HTTP_STATUS_CODES } from '@/dtos'
+import { Request, Response } from 'express'
+
+import { HTTP_STATUS_CODES, UserByIdRequest } from '@/dtos'
 import { BadRequestError, getErrorResponse } from '@/helpers/errors'
 
 export async function deleteUserById(req: Request, res: Response) {
@@ -19,8 +19,6 @@ export async function deleteUserById(req: Request, res: Response) {
     await AppDataSource.manager.delete(User, { id: request.id })
     res.sendStatus(HTTP_STATUS_CODES.NO_CONTENT)
   } catch (error) {
-    res
-      .status(error.status ?? HTTP_STATUS_CODES.INTERNAL_ERROR)
-      .send(getErrorResponse(error))
+    res.status(error.status ?? HTTP_STATUS_CODES.INTERNAL_ERROR).send(getErrorResponse(error))
   }
 }

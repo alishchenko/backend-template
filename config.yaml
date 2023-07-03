@@ -1,0 +1,15 @@
+nodeEnv: 'Development'
+
+app:
+  name: "nest-template"
+  host: localhost
+  port: 3000
+  globalPrefix: "v1"
+
+db:
+  url: "postgresql://user:user@localhost:5433/user?sslmode=disable"
+
+log:
+  level: "debug"
+  inJson: true
+

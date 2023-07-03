@@ -1,5 +1,5 @@
+import { IsBoolean, IsNumber, IsString, Min, validate } from 'class-validator'
 import { Request } from 'express'
-import { validate, IsNumber, IsBoolean, IsString, Min } from 'class-validator'
 
 import { BadRequestError } from '@/helpers/errors'
 
@@ -24,8 +24,6 @@ export class CreateUserRequest {
 
     if (!errors.length) return
 
-    throw new BadRequestError(
-      'failed to parse create request: ' + errors[0].toString(),
-    )
+    throw new BadRequestError('failed to parse create request: ' + errors[0].toString())
   }
 }

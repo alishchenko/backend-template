@@ -1,9 +1,12 @@
 import winston from 'winston'
 
-import { config } from '@/config'
+import { loadConfiguration } from '@/config'
 
-export const logger = winston.createLogger({
-  level: config ? config.LEVEL_INFO : 'info',
-  format: winston.format.json(),
-  transports: [new winston.transports.Console()],
-})
+export function createLogger() {
+  const globalConfiguration = loadConfiguration()
+  return winston.createLogger({
+    level: globalConfiguration ? globalConfiguration.log.level : 'info',
+    format: winston.format.json(),
+    transports: [new winston.transports.Console()],
+  })
+}

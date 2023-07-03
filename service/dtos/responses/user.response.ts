@@ -1,14 +1,8 @@
-import { Request } from 'express'
-import { Expose, Type, plainToClass } from 'class-transformer'
-
 import { User } from '@data/entity'
-import {
-  ListUsersRequest,
-  JsonApiResponse,
-  getLinks,
-  Links,
-  RESPONSE_TYPES,
-} from '@/dtos'
+import { Expose, plainToClass, Type } from 'class-transformer'
+import { Request } from 'express'
+
+import { getLinks, JsonApiResponse, Links, ListUsersRequest, RESPONSE_TYPES } from '@/dtos'
 
 class UserResponseAttributes {
   @Expose()

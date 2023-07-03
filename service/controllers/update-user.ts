@@ -1,8 +1,8 @@
-import { Request, Response } from 'express'
-
 import { AppDataSource } from '@data'
 import { User } from '@data/entity'
-import { UpdateUserRequest, HTTP_STATUS_CODES } from '@/dtos'
+import { Request, Response } from 'express'
+
+import { HTTP_STATUS_CODES, UpdateUserRequest } from '@/dtos'
 import { BadRequestError, getErrorResponse } from '@/helpers/errors'
 
 export async function updateUserById(req: Request, res: Response) {
@@ -15,15 +15,9 @@ export async function updateUserById(req: Request, res: Response) {
     if (!user) {
       throw new BadRequestError('user not found')
     }
-    await AppDataSource.manager.update(
-      User,
-      { id: request.id },
-      request.attributes,
-    )
+    await AppDataSource.manager.update(User, { id: request.id }, request.attributes)
     res.status(HTTP_STATUS_CODES.NO_CONTENT).end()
   } catch (error) {
-    res
-      .status(error.status ?? HTTP_STATUS_CODES.INTERNAL_ERROR)
-      .send(getErrorResponse(error))
+    res.status(error.status ?? HTTP_STATUS_CODES.INTERNAL_ERROR).send(getErrorResponse(error))
   }
 }

@@ -1,10 +1,10 @@
+import { validate } from 'class-validator'
 import { Request } from 'express'
 
-import { validate } from 'class-validator'
-
 import { PAGE_ORDER } from '@/dtos'
-import { config } from '@/config'
 import { BadRequestError } from '@/helpers/errors'
+
+const DEFAULT_PAGE_LIMIT = 15
 
 export class ListUsersRequest {
   filter: {
@@ -19,7 +19,7 @@ export class ListUsersRequest {
   }
   constructor(req: Request) {
     this.page = {
-      limit: config.DEFAULT_PAGE_LIMIT,
+      limit: DEFAULT_PAGE_LIMIT,
       number: 0,
       order: PAGE_ORDER.DESC,
     }

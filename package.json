@@ -5,12 +5,10 @@
   "scripts": {
     "start": "node main.ts run service",
     "dev": "clear && nodemon main.ts run service",
-
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm",
     "migration:generate": "yarn typeorm migration:generate -d ./data/data-source.ts",
     "migrate:up": "yarn typeorm migration:run -d ./data/data-source.ts",
     "migrate:down": "yarn typeorm migration:revert -- -d ./data/data-source.ts",
-
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
@@ -19,21 +17,25 @@
   },
   "_moduleAliases": {
     "@": "service",
-    "@data": "data"
+    "@data": "data",
+    "@common": "libs/common"
   },
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.6.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "dotenv": "^16.3.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "express": "^4.18.2",
     "joi": "^17.9.2",
+    "js-yaml": "^4.1.0",
     "pg": "^8.11.0",
     "typeorm": "^0.3.16",
     "winston": "^3.9.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
+    "@types/js-yaml": "^4.0.5",
     "@types/node": "^20.2.3",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",

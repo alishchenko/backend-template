@@ -1,5 +1,5 @@
-export * from '@/controllers/list-users'
 export * from '@/controllers/create-user'
-export * from '@/controllers/get-user'
 export * from '@/controllers/delete-user'
+export * from '@/controllers/get-user'
+export * from '@/controllers/list-users'
 export * from '@/controllers/update-user'

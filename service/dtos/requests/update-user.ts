@@ -1,5 +1,5 @@
+import { IsNumber, validate } from 'class-validator'
 import { Request } from 'express'
-import { validate, IsNumber } from 'class-validator'
 
 import { BadRequestError } from '@/helpers/errors'
 
@@ -27,8 +27,6 @@ export class UpdateUserRequest {
 
     if (!errors.length) return
 
-    throw new BadRequestError(
-      'failed to parse update request: ' + errors[0].toString(),
-    )
+    throw new BadRequestError('failed to parse update request: ' + errors[0].toString())
   }
 }

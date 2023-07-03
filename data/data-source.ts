@@ -1,10 +1,11 @@
 import { DataSource } from 'typeorm'
 
-import { config } from '@/config'
+import { getConfig } from '@/config'
 
+const config = getConfig()
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  url: config.DB_URL,
+  url: config.db.url,
   synchronize: false,
   logging: true,
   entities: ['./data/entity/*.ts'],

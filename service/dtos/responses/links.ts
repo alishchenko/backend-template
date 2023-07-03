@@ -28,10 +28,7 @@ export function getLinks(
 
   return {
     first: url.pathname + setLink(searchParams, 0),
-    previous:
-      page.number - 1 >= 0
-        ? url.pathname + setLink(searchParams, page.number - 1)
-        : '',
+    previous: page.number - 1 >= 0 ? url.pathname + setLink(searchParams, page.number - 1) : '',
     self: url.pathname + setLink(searchParams, page.number),
     next: url.pathname + setLink(searchParams, page.number + 1),
   }

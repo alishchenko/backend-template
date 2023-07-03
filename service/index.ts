@@ -1,17 +1,19 @@
-import http from 'http'
-import express from 'express'
-
-import { config } from '@/config'
-import { logger } from '@/helpers'
-import { router } from '@/router'
 import { AppDataSource } from '@data'
+import express from 'express'
+import http from 'http'
 
-const PORT = config.PORT
-const HOST = config.HOST
+import { getConfig } from '@/config'
+import { createLogger } from '@/helpers'
+import { router } from '@/router'
+
+const config = getConfig()
+const PORT = config.app.port
+const HOST = config.app.host
 const URL = `http://${HOST}:${PORT}`
 
 const app = express()
 const server = http.createServer(app)
+const logger = createLogger()
 
 app.use(express.json({ limit: '50mb' }))
 app.use(router)
