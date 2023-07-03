@@ -21,11 +21,10 @@ This is a template for building a backend server using TypeScript.
 To get started with this template, follow these steps:
 
 1. Clone the repository that uses this template.
-2. Create an `.env` file. You can find an example in `env.example`.
-3. Install the required dependencies by running `npm install` (or `yarn install`).
-4. Add database container `docker-compose up -d`.
-5. Run the migrations `npm run migrate:up` (or `yarn migrate:up`).
-6. Start the service by running `npm run dev` (or `yarn dev`).
+2. Install the required dependencies by running `npm install` (or `yarn install`).
+3. Add database container `docker-compose up -d`.
+4. Run the migrations `npm run migrate:up` (or `yarn migrate:up`).
+5. Start the service by running `npm run dev` (or `yarn dev`).
 
 ## Working with the Database
 
