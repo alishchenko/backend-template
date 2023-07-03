@@ -1,10 +1,8 @@
 import { validate } from 'class-validator'
 import { Request } from 'express'
 
-import { PAGE_ORDER } from '@/dtos'
+import { DEFAULT_PAGE_LIMIT, PAGE_ORDER } from '@/dtos'
 import { BadRequestError } from '@/helpers/errors'
-
-const DEFAULT_PAGE_LIMIT = 15
 
 export class ListUsersRequest {
   filter: {
