@@ -17,15 +17,13 @@
   },
   "_moduleAliases": {
     "@": "service",
-    "@data": "data",
-    "@common": "libs/common"
+    "@data": "data"
   },
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.6.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "dotenv": "^16.3.1",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
     "express": "^4.18.2",
     "joi": "^17.9.2",
     "js-yaml": "^4.1.0",
@@ -43,6 +41,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-typescript": "^0.14.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "module-alias": "^2.2.3",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",

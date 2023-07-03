@@ -13,8 +13,7 @@
       "@/*": ["service/*"],
       "@": ["service"],
       "@data": ["data"], 
-      "@data/*": ["data/*"],
-      "@common/*": ["libs/common/*"], 
+      "@data/*": ["data/*"]
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
