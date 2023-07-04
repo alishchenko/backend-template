@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "start": "node main.ts run service",
+    "start": "ts-node main.ts run service",
     "dev": "clear && nodemon main.ts run service",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm",
     "migration:generate": "yarn typeorm migration:generate -d ./data/data-source.ts",
     "migrate:up": "yarn typeorm migration:run -d ./data/data-source.ts",
-    "migrate:down": "yarn typeorm migration:revert -- -d ./data/data-source.ts",
+    "migrate:down": "yarn typeorm migration:revert -d ./data/data-source.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
