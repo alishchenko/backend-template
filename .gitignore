@@ -1,7 +1,5 @@
 .DS_Store
 node_modules/
-frontend/node_modules/
-OLD/
 dist/
 dist-ssr/
 npm-debug.log*
