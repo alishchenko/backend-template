@@ -1,15 +1,15 @@
 import { Router } from 'express'
 
-import * as users from '@/controllers'
+import { userController } from '@/controllers'
 
 const userRouter = Router()
 
-userRouter.route('/').get(users.listUsers).post(users.createUser)
+userRouter.route('/').get(userController.listUsers).post(userController.createUser)
 
 userRouter
   .route('/:id')
-  .get(users.getUserById)
-  .delete(users.deleteUserById)
-  .patch(users.updateUserById)
+  .get(userController.getUserById)
+  .delete(userController.deleteUserById)
+  .patch(userController.updateUserById)
 
 export { userRouter }
