@@ -1,13 +1,12 @@
-import { AppDataSource } from '@data'
-import { User } from '@data/entity'
+import { AppDataSource, User } from '@data'
 import { Request, Response } from 'express'
 import { FindOptionsWhere, In } from 'typeorm'
 
-import { ListUsersRequest, UserListToResponse } from '@/dtos'
+import { ListUsersRequest, UserListToResponse, validateRequest } from '@/dtos'
 
 export async function listUsers(req: Request, res: Response) {
   const request = new ListUsersRequest(req)
-  request.validateRequest()
+  validateRequest(request)
 
   const users = await getUsers(request)
 

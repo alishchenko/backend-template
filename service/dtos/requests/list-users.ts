@@ -1,8 +1,6 @@
-import { validate } from 'class-validator'
 import { Request } from 'express'
 
 import { DEFAULT_PAGE_LIMIT, PAGE_ORDER } from '@/dtos'
-import { BadRequestError } from '@/helpers/errors'
 
 export class ListUsersRequest {
   filter: {
@@ -58,13 +56,5 @@ export class ListUsersRequest {
           : [Boolean(filterParams.role)]),
       ]
     }
-  }
-
-  async validateRequest() {
-    const errors = await validate(this)
-
-    if (!errors.length) return
-
-    throw new BadRequestError('failed to parse list user request')
   }
 }

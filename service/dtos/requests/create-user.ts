@@ -1,3 +1,4 @@
+import { plainToClass } from 'class-transformer'
 import { IsBoolean, IsNumber, IsString, Min, validate } from 'class-validator'
 import { Request } from 'express'
 
@@ -13,17 +14,22 @@ export class CreateUserRequest {
 
   @IsBoolean()
   role: boolean
+}
 
-  constructor(req: Request) {
-    this.name = req.body.data.attributes.name
-    this.age = req.body.data.attributes.age
-    this.role = req.body.data.attributes.role
-  }
-  async validateRequest() {
-    const errors = await validate(this)
+export function newCreateUserRequest(req: Request): CreateUserRequest {
+  if (!req.body.data || !req.body.data.attributes)
+    throw new BadRequestError({ detail: 'Not JSON API request' })
 
-    if (!errors.length) return
+  const request = plainToClass(CreateUserRequest, req.body.data.attributes)
 
-    throw new BadRequestError('failed to parse create request: ' + errors[0].toString())
-  }
+  validateRequest(request)
+  return request
+}
+
+export async function validateRequest(object: object) {
+  const errors = await validate(object)
+
+  if (!errors.length) return
+
+  throw new BadRequestError({ detail: 'failed to parse request' })
 }

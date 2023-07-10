@@ -3,9 +3,12 @@ import { RequestError } from '@/helpers/errors'
 
 type ErrorResponse = {
   errors: {
+    id?: string
     title: string
     status: HTTP_STATUS_CODES
     detail?: string
+    code?: string
+    meta?: { [key: string]: unknown }
   }
 }
 
@@ -17,6 +20,9 @@ export function getErrorResponse(error: RequestError): ErrorResponse {
           title: 'Bad auth credentials provided',
           status: error.status,
           detail: error.message,
+          id: error.id,
+          code: error.code,
+          meta: error.meta,
         },
       }
     case HTTP_STATUS_CODES.BAD_REQUEST:
@@ -25,6 +31,9 @@ export function getErrorResponse(error: RequestError): ErrorResponse {
           title: 'Bad request',
           status: error.status,
           detail: error.message,
+          id: error.id,
+          code: error.code,
+          meta: error.meta,
         },
       }
     case HTTP_STATUS_CODES.NOT_FOUND:
@@ -33,6 +42,9 @@ export function getErrorResponse(error: RequestError): ErrorResponse {
           title: 'Not found',
           status: error.status,
           detail: error.message,
+          id: error.id,
+          code: error.code,
+          meta: error.meta,
         },
       }
     case HTTP_STATUS_CODES.INTERNAL_ERROR:
@@ -42,6 +54,9 @@ export function getErrorResponse(error: RequestError): ErrorResponse {
           title: 'Internal server error',
           status: HTTP_STATUS_CODES.INTERNAL_ERROR,
           detail: error.message,
+          id: error.id,
+          code: error.code,
+          meta: error.meta,
         },
       }
   }

@@ -1,4 +1,4 @@
-import { User } from '@data/entity'
+import { User } from '@data'
 import { Expose, plainToClass, Type } from 'class-transformer'
 import { Request } from 'express'
 

@@ -18,6 +18,44 @@ app.use(router)
 export const logger = createLogger()
 
 AppDataSource.initialize().catch(error => logger.debug(error))
-export const run = function () {
-  server.listen(PORT, HOST, () => logger.debug(URL))
+export const run = () => {
+  server.listen(PORT, HOST, () => {
+    logger.debug(`Server running at ${URL}`)
+  })
+
+  server.on('error', error => {
+    logger.error('Server error:', error)
+    process.exit(1) // Terminate the process with a non-zero status code
+  })
 }
+
+const shutdown = async () => {
+  logger.debug('Shutting down gracefully...')
+
+  server.close(async error => {
+    if (error) {
+      logger.error('Error occurred while closing the server:', error)
+      process.exit(1)
+    }
+
+    logger.debug('Server closed. Waiting for ongoing requests to complete...')
+
+    const timeout = setTimeout(() => {
+      logger.warn('Forcefully terminating the process due to ongoing requests...')
+      process.exit(1)
+    }, 5000)
+
+    try {
+      await AppDataSource.destroy()
+
+      clearTimeout(timeout)
+      logger.debug('Shutdown complete. Exiting...')
+      process.exit(0)
+    } catch (error) {
+      logger.error('Error occurred during cleanup:', error)
+      process.exit(1)
+    }
+  })
+}
+
+process.on('SIGINT', shutdown())

@@ -1,14 +1,12 @@
-import { AppDataSource } from '@data'
-import { User } from '@data/entity'
+import { AppDataSource, User } from '@data'
 import { Request, Response } from 'express'
 
-import { CreateUserRequest, HTTP_STATUS_CODES, IdResponse, RESPONSE_TYPES } from '@/dtos'
+import { HTTP_STATUS_CODES, IdResponse, newCreateUserRequest, RESPONSE_TYPES } from '@/dtos'
 import { getErrorResponse } from '@/helpers/errors'
 
 export async function createUser(req: Request, res: Response) {
   try {
-    const request = new CreateUserRequest(req)
-    await request.validateRequest()
+    const request = newCreateUserRequest(req)
 
     const createdAt = new Date()
     const user = new User()
