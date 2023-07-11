@@ -25,7 +25,7 @@ export const run = () => {
 
   server.on('error', error => {
     logger.error('Server error:', error)
-    process.exit(1) // Terminate the process with a non-zero status code
+    process.exit(1)
   })
 }
 
@@ -58,4 +58,5 @@ const shutdown = async () => {
   })
 }
 
-process.on('SIGINT', shutdown())
+process.on('SIGINT', shutdown)
+process.on('SIGINT', shutdown)
