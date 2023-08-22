@@ -1,60 +1,43 @@
 import { Request } from 'express'
 
-import { DEFAULT_PAGE_LIMIT, PAGE_ORDER } from '@/dtos'
+import { DEFAULT_PAGE_LIMIT, PAGE_ORDER, PageOpts } from '@/dtos'
+import { parseFilters, parsePageOpts } from '@/helpers'
 
-export class ListUsersRequest {
-  filter: {
-    name: string[]
-    age: number[]
-    role: boolean[]
+type UserFilters = {
+  name: string[]
+  age: number[]
+  role: boolean[]
+}
+
+function isUserFiltersKey(key: string): key is string & keyof UserFilters {
+  const templateObject: UserFilters = {
+    name: [],
+    age: [],
+    role: []
   }
-  page: {
-    limit: number
-    number: number
-    order: PAGE_ORDER
+
+  return key in templateObject
+}
+export class ListUsersRequest {
+  filter: UserFilters = {
+    name: [],
+    age: [],
+    role: []
+  }
+  page: PageOpts = {
+    limit: DEFAULT_PAGE_LIMIT,
+    number: 0,
+    order: PAGE_ORDER.DESC,
   }
   constructor(req: Request) {
     this.page = {
-      limit: DEFAULT_PAGE_LIMIT,
-      number: 0,
-      order: PAGE_ORDER.DESC,
+      ...this.page,
+      ...parsePageOpts(req.query),
     }
+
     this.filter = {
-      name: [],
-      age: [],
-      role: [],
-    }
-
-    const params = req.query
-    const pageParams = params.page as typeof params
-    const filterParams = params.filter as typeof params
-
-    if (params.page) {
-      if (pageParams.number) this.page.number = Number(pageParams.number)
-      if (pageParams.limit) this.page.limit = Number(pageParams.limit)
-      if (pageParams.order) this.page.order as PAGE_ORDER
-    }
-
-    if (!filterParams) return
-    if (filterParams.name) {
-      this.filter.name =
-        filterParams.name instanceof Array
-          ? (filterParams.name as string[])
-          : [filterParams.name as string]
-    }
-    if (filterParams.age) {
-      this.filter.age = [
-        ...(filterParams.age instanceof Array
-          ? filterParams.age.map(Number)
-          : [Number(filterParams.age)]),
-      ]
-    }
-    if (filterParams.role) {
-      this.filter.role = [
-        ...(filterParams.role instanceof Array
-          ? filterParams.role.map(Boolean)
-          : [Boolean(filterParams.role)]),
-      ]
+      ...this.filter,
+      ...parseFilters<UserFilters>(req.query, isUserFiltersKey),
     }
   }
 }

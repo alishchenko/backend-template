@@ -1,15 +1,8 @@
-export * from '@/dtos/responses/json-api.response'
-
-// responses
-export * from '@/dtos/responses/id.response'
-export * from '@/dtos/responses/links'
-export * from '@/dtos/responses/user.response'
-
 // requests
+export * from '@/dtos/requests/by-id-request'
 export * from '@/dtos/requests/create-user'
 export * from '@/dtos/requests/list-users'
 export * from '@/dtos/requests/update-user'
-export * from '@/dtos/requests/user-by-id'
 
 //enums
 export * from '@/dtos/enums/env.enums'
@@ -20,3 +13,6 @@ export * from '@/dtos/enums/response-types.enums'
 
 // consts
 export * from '@/dtos/consts/default-page-limit.consts'
+
+// other types
+export * from '@/dtos/types/api.types'

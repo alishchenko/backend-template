@@ -2,7 +2,8 @@ import { AppDataSource, User } from '@data'
 import { Request, Response } from 'express'
 import { FindOptionsWhere, In } from 'typeorm'
 
-import { ListUsersRequest, UserListToResponse, validateRequest } from '@/dtos'
+import { ListUsersRequest, validateRequest, RESPONSE_TYPES } from '@/dtos'
+import { buildJsonApiListResponse } from '@/helpers'
 
 export async function listUsers(req: Request, res: Response) {
   const request = new ListUsersRequest(req)
@@ -10,9 +11,7 @@ export async function listUsers(req: Request, res: Response) {
 
   const users = await getUsers(request)
 
-  const userResources = UserListToResponse(req, request, users)
-
-  res.status(200).send(userResources)
+  res.status(200).send(buildJsonApiListResponse(users, RESPONSE_TYPES.USERS, req.originalUrl, request.page))
 }
 
 function getUsers(params: ListUsersRequest): Promise<User[]> {

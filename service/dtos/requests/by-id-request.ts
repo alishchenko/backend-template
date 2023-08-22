@@ -1,7 +1,7 @@
 import { IsNumber } from 'class-validator'
 import { Request } from 'express'
 
-export class UserByIdRequest {
+export class ByIdRequest {
   @IsNumber()
   id: number
 
