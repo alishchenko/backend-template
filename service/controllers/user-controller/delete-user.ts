@@ -1,7 +1,7 @@
 import { AppDataSource, User } from '@data'
 import { Request, Response } from 'express'
 
-import { HTTP_STATUS_CODES, ByIdRequest, validateRequest, newRequest } from '@/dtos'
+import { ByIdRequest, HTTP_STATUS_CODES, newRequest, validateRequest } from '@/dtos'
 import { BadRequestError, getErrorResponse } from '@/helpers/errors'
 
 export async function deleteUserById(req: Request, res: Response) {

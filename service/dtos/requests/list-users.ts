@@ -13,7 +13,7 @@ function isUserFiltersKey(key: string): key is string & keyof UserFilters {
   const templateObject: UserFilters = {
     name: [],
     age: [],
-    role: []
+    role: [],
   }
 
   return key in templateObject
@@ -22,7 +22,7 @@ export class ListUsersRequest {
   filter: UserFilters = {
     name: [],
     age: [],
-    role: []
+    role: [],
   }
   page: PageOpts = {
     limit: DEFAULT_PAGE_LIMIT,

@@ -1,8 +1,8 @@
 import { AppDataSource, User } from '@data'
 import { Request, Response } from 'express'
 
-import { HTTP_STATUS_CODES, ByIdRequest, validateRequest, RESPONSE_TYPES, newRequest } from '@/dtos'
-import { BadRequestError, getErrorResponse, buildJsonApiResponse, NotFoundError } from '@/helpers'
+import { ByIdRequest, HTTP_STATUS_CODES, newRequest, RESPONSE_TYPES, validateRequest } from '@/dtos'
+import { BadRequestError, buildJsonApiResponse, getErrorResponse, NotFoundError } from '@/helpers'
 
 export async function getUserById(req: Request, res: Response) {
   try {
